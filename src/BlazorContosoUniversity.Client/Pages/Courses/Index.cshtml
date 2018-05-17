@@ -1,0 +1,43 @@
+﻿@page "/courses"
+@inherits IndexModel
+
+<h2>Courses</h2>
+
+<p>
+    <a href="/courses/create">Create New</a>
+</p>
+
+@if (IsBusy)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Course ID </th>
+                <th scope="col">Title</th>
+                <th scope="col">Credits</th>
+                <th scope="col">Department</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in Courses)
+            {
+            <tr>
+                <th scope="row">@course.CourseID</th>
+                <td>@course.Title</td>
+                <td>@course.Credits</td>
+                <td>@course.DepartmentName</td>
+                <td>
+                    <ActionLinkButton Action="Details" Route="/courses" RouteValue="@course.CourseID"></ActionLinkButton>
+                    <ActionLinkButton Action="Edit" Route="/courses" RouteValue="@course.CourseID"></ActionLinkButton>
+                    <ActionLinkButton Action="Delete" Route="/courses" RouteValue="@course.CourseID"></ActionLinkButton>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}

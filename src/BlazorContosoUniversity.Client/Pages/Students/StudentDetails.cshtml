@@ -1,0 +1,30 @@
+﻿<dl class="row">
+    <dt class="col-sm-2">
+        Last Name
+    </dt>
+    <dd class="col-sm-10">
+        @LastName
+    </dd>
+    <dt class="col-sm-2">
+        First Name
+    </dt>
+    <dd class="col-sm-10">
+        @FirstMidName
+    </dd>
+    <dt class="col-sm-2">
+        Enrollment Date
+    </dt>
+    <dd class="col-sm-10">
+        @EnrollmentDate.ToString("dd MMM yyyy")
+    </dd>
+</dl>
+
+@functions
+{
+    [Parameter]
+    string LastName { get; set; }
+    [Parameter]
+    string FirstMidName { get; set; }
+    [Parameter]
+    DateTime EnrollmentDate { get; set; }
+}

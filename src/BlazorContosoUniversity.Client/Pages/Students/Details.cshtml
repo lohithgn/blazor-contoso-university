@@ -1,0 +1,22 @@
+﻿@page "/students/details/{StudentId}"
+@inherits DetailsModel
+
+<h2>Details</h2>
+
+@if(Student == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+<div>
+    <h4>Student</h4>
+    <hr />
+    <StudentDetails LastName="@Student.LastName" FirstMidName="@Student.FirstMidName" EnrollmentDate="@Student.EnrollmentDate"></StudentDetails> 
+    <StudentEnrollments Enrollments="@Student.Enrollments"></StudentEnrollments>
+</div>
+<div>
+    <a href="/students/edit/@Student.Id">Edit</a> |
+    <a href="/students">Back to List</a>
+</div>
+}

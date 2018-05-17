@@ -1,0 +1,33 @@
+﻿<dl class="row">
+    <dt class="col-sm-2">
+        Enrollments
+    </dt>
+    <dd class="col-sm-3">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>Course Title</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Enrollments)
+                {
+                    <tr>
+                        <td>
+                            @item.CourseTitle
+                        </td>
+                        <td>
+                            @(item.Grade ?? "No Grade")
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </dd>
+</dl>
+@functions
+{
+    [Parameter]
+    List<EnrollmentDto> Enrollments{ get; set; }
+}

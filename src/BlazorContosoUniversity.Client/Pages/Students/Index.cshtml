@@ -1,0 +1,66 @@
+﻿@page "/students"
+@inherits IndexModel
+
+<h2>Index</h2>
+
+<p>
+    <a href="/students/create">Create New</a>
+</p>
+
+@if (Students == null)
+{
+    <p>
+        Loading...
+    </p>
+}
+else
+{
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><span class="oi oi-people"></span></div>
+                </div>
+                <input type="text" class="form-control" placeholder="Filter by Student" bind="@SearchString" />
+            </div>
+        </div>
+        <div class="col-sm-9"><button class="btn btn-primary" onclick="@OnSearchClick">Search</button></div>
+    </div>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">
+                    <a href="javascript:void(0)" onclick="@SortByLastName">
+                        Last Name <span class="@NameSortClass"></span>
+                    </a>
+                </th>
+                <th scope="col">First Name</th>
+                <th scope="col">
+                    <a href="javascript:void(0)" onclick="@SortByEnrollmentDate">
+                        Enrollment Date <span class="@DateSortClass"></span>
+                    </a>
+                </th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Students)
+            {
+                <tr>
+                    <th scope="row">@student.LastName</th>
+                    <td>@student.FirstMidName</td>
+                    <td>@student.EnrollmentDate.ToString("dd MMM yyyy")</td>
+                    <td>
+                        <ActionLinkButton Action="Details" Route="/students" RouteValue="@student.Id.ToString()"></ActionLinkButton>
+                        <ActionLinkButton Action="Edit" Route="/students" RouteValue="@student.Id.ToString()"></ActionLinkButton>
+                        <ActionLinkButton Action="Delete" Route="/students" RouteValue="@student.Id.ToString()"></ActionLinkButton>
+                        @*<a class="btn btn-link pt-0 pb-0" href=""><span class="oi oi-eye text-primary" data-toggle="tooltip" title="View"></span></a>
+                        <a class="btn btn-link pt-0 pb-0" href="/students/edit/@student.Id"><span class="oi oi-pencil text-warning" data-toggle="tooltip" title="Edit"></span></a>
+                        <a class="btn btn-link pt-0 pb-0" href="/students/delete/@student.Id"><span class="oi oi-trash text-danger" data-toggle="tooltip" title="Delete"></span></a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
