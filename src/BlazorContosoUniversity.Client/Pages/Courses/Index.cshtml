@@ -27,14 +27,14 @@ else
             @foreach (var course in Courses)
             {
             <tr>
-                <th scope="row">@course.CourseID</th>
+                <th scope="row">@course.Id</th>
                 <td>@course.Title</td>
                 <td>@course.Credits</td>
                 <td>@course.DepartmentName</td>
                 <td>
-                    <ActionLinkButton Action="Details" Route="/courses" RouteValue="@course.CourseID"></ActionLinkButton>
-                    <ActionLinkButton Action="Edit" Route="/courses" RouteValue="@course.CourseID"></ActionLinkButton>
-                    <ActionLinkButton Action="Delete" Route="/courses" RouteValue="@course.CourseID"></ActionLinkButton>
+                    <ActionLinkButton Action="Details" Route="/courses" RouteValue="@course.Id.ToString()"></ActionLinkButton>
+                    <ActionLinkButton Action="Edit" Route="/courses" RouteValue="@course.Id.ToString()"></ActionLinkButton>
+                    <ActionLinkButton Action="Delete" Route="/courses" RouteValue="@course.Id.ToString()"></ActionLinkButton>
                 </td>
             </tr>
             }

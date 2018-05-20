@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BlazorContosoUniversity.Infrastructure;
+using BlazorContosoUniversity.Models;
 using BlazorContosoUniversity.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,7 @@ namespace BlazorContosoUniversity.Server.Controllers
 
         // GET: api/Courses
         [HttpGet]
+        [Route("")]
         public async Task<IActionResult> Get()
         {
             var courses = await _context.Courses
@@ -36,28 +38,81 @@ namespace BlazorContosoUniversity.Server.Controllers
         }
 
         // GET: api/Courses/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet, ActionName("GetCourse")]
+        [Route("{id}")]
+        public async Task<IActionResult> GetById(int? id)
         {
-            return "value";
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var course = await _context.Courses
+                                       .Include(c => c.Department)
+                                       .AsNoTracking()
+                                       .SingleOrDefaultAsync(m => m.CourseID == id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return Ok(_mapper.Map<CourseDto>(course));
         }
 
         // POST: api/Courses
         [HttpPost]
-        public void Post([FromBody]string value)
+        [Route("")]
+        public async Task<IActionResult> Post([FromBody] CourseDto course)
         {
+            if (course == null)
+            {
+                return BadRequest();
+            }
+            var newCourse = _mapper.Map<Course>(course);
+            _context.Courses.Add(newCourse);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtRoute("GetCourse", new { id = newCourse.CourseID }, newCourse);
         }
 
         // PUT: api/Courses/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Put(int? id, [FromBody]CourseDto courseToEdit)
         {
+            if (courseToEdit == null || courseToEdit.Id != id)
+            {
+                return BadRequest();
+            }
+
+            var course = _context.Courses.Find(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            course.Title = courseToEdit.Title;
+            course.Credits = courseToEdit.Credits;
+            course.DepartmentID = courseToEdit.DepartmentID;
+
+            _context.Courses.Update(course);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
+            var course = _context.Courses.Find(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            _context.Courses.Remove(course);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }

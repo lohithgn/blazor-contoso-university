@@ -13,6 +13,7 @@ namespace BlazorContosoUniversity.Client
             var serviceProvider = new BrowserServiceProvider(services =>
             {
                 services.AddSingleton<StudentsServiceClient>();
+                services.AddSingleton<DepartmentsServiceClient>();
                 services.AddSingleton<CoursesServiceClient>();
             });
 

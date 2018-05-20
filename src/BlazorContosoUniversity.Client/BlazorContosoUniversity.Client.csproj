@@ -28,6 +28,10 @@
 
   <ItemGroup>
     <None Include="Pages\About.cshtml" />
+    <None Include="Pages\Courses\Create.cshtml" />
+    <None Include="Pages\Courses\Delete.cshtml" />
+    <None Include="Pages\Courses\Details.cshtml" />
+    <None Include="Pages\Courses\Edit.cshtml" />
     <None Include="Pages\Courses\Index.cshtml" />
     <None Include="Pages\Students\Create.cshtml" />
     <None Include="Pages\Students\Delete.cshtml" />
@@ -105,6 +109,38 @@
 
   <ItemGroup>
     <BlazorGenerate Remove="Shared\ActionLinkButton.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Courses\Details.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Courses\Details.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Courses\Edit.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Courses\Edit.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Courses\Create.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Courses\Create.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Courses\Delete.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Courses\Delete.cshtml" />
   </ItemGroup>
 
 </Project>

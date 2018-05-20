@@ -90,7 +90,7 @@ namespace BlazorContosoUniversity.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] StudentDto student)
+        public async Task<IActionResult> Post([FromBody] StudentDto student)
         {
             if (student == null)
             {
@@ -98,7 +98,7 @@ namespace BlazorContosoUniversity.Controllers
             }
             var newStudent = _mapper.Map<Student>(student);
             _context.Students.Add(newStudent);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return CreatedAtRoute("GetStudent", new { id = newStudent.ID }, newStudent);
         }

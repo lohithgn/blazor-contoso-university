@@ -9,12 +9,9 @@ namespace BlazorContosoUniversity.Client.Pages.Students
 {
     public class EditModel : BlazorComponent
     {
-        [Parameter]
-        string StudentId { get; set; }
-        [Inject()]
-        StudentsServiceClient Client { get; set; }
-        [Inject()]
-        IUriHelper UriHelper { get; set; }
+        [Parameter] string StudentId { get; set; }
+        [Inject] StudentsServiceClient Client { get; set; }
+        [Inject] IUriHelper UriHelper { get; set; }
 
         public StudentDto Student { get; set; }
         public bool IsBusy { get; set; } = false;

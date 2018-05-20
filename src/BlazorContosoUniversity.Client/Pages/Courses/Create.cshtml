@@ -1,0 +1,57 @@
+﻿@page "/courses/create"
+@inherits CreateModel
+<h2>Create</h2>
+
+<h4>Course</h4>
+<hr>
+@if (IsBusy)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form novalidate="novalidate">
+                <div class="form-group">
+                    <label for="CourseID" class="control-label">Number</label>
+                    <div><input name="CourseID" id="CourseID" bind="@Course.Id" class="form-control" /></div>
+                </div>
+                <div class="form-group">
+                    <label for="Title" class="control-label">Title</label>
+                    <input name="Title" id="Title" bind="@Course.Title" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Credits" class="control-label">Credits</label>
+                    <select name="Credits" id="Credits" class="custom-select" bind="@Course.Credits">
+                        <option value="">-- Select Credits --</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="EnrollmentDate" class="control-label">Department</label>
+                    <select class="custom-select" bind="@Course.DepartmentID">
+                        <option value="">-- Select Department --</option>
+                        @foreach (var department in Departments)
+                        {
+                            <option value="@department.DepartmentID">@department.Name</option>
+                        }
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+            </form>
+            <div class="form-group">
+                <input type="button" value="Save" class="btn btn-primary" onclick="@OnSaveClick" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    <a href="/courses">Back to List</a>
+</div>

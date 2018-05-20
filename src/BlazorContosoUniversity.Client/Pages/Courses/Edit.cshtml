@@ -1,0 +1,57 @@
+﻿@page "/courses/edit/{CourseID}"
+
+@inherits EditModel
+
+<h2>Edit</h2>
+
+<h4>Course</h4>
+<hr>
+@if (IsBusy)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form novalidate="novalidate">
+                <div class="form-group">
+                    <label for="LastName" class="control-label">Number</label>
+                    <div>@Course.Id</div>
+                </div>
+                <div class="form-group">
+                    <label for="Title" class="control-label">Title</label>
+                    <input name="Title" id="Title" bind="@Course.Title" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Credits" class="control-label">Credits</label>
+                    <select name="Credits" id="Credits" class="custom-select" bind="@Course.Credits">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>     
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="EnrollmentDate" class="control-label">Department</label>
+                    <select class="custom-select" bind="@Course.DepartmentID">
+                        @foreach (var department in Departments)
+                        {
+                            <option value="@department.DepartmentID">@department.Name</option>
+                        }
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+            </form>
+            <div class="form-group">
+                <input type="button" value="Save" class="btn btn-primary" onclick="@OnSaveClick" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    <a href="/courses">Back to List</a>
+</div>
