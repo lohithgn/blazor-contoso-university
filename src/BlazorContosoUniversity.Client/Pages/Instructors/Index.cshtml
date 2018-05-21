@@ -1,0 +1,50 @@
+﻿@page "/instructors"
+@inherits IndexModel
+
+<h2>Instructors</h2>
+
+<p>
+    <a href="/instructors/create">Create New</a>
+</p>
+
+@if (IsBusy)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Last Name</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Hiredate</th>
+                <th scope="col">Office</th>
+                <th scope="col">Courses</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var instructor in Instructors)
+            {
+                <tr>
+                    <th scope="row">@instructor.LastName</th>
+                    <td>@instructor.FirstMidName</td>
+                    <td>@instructor.HireDate.ToString("dd MMM yyyy")</td>
+                    <td>@instructor.Location</td>
+                    <td>
+                        @foreach (var course in instructor.Courses)
+                        {
+                            @course.CourseID @:  @course.CourseTitle <br />
+                        }
+                    </td>
+                    <td>
+                        <ActionLinkButton Action="Details" Route="/instructors" RouteValue="@instructor.Id.ToString()"></ActionLinkButton>
+                        <ActionLinkButton Action="Edit" Route="/instructors" RouteValue="@instructor.Id.ToString()"></ActionLinkButton>
+                        <ActionLinkButton Action="Delete" Route="/instructors" RouteValue="@instructor.Id.ToString()"></ActionLinkButton>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

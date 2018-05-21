@@ -1,0 +1,57 @@
+﻿@page "/instructors/details/{InstructorID}"
+@inherits DetailsModel
+
+<h2>Details</h2>
+<hr />
+<div>
+    
+    
+    @if (IsBusy)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>Instructor</h4>
+                <dl class="row">
+                    <dt class="col-sm-4">Last Name</dt>
+                    <dd class="col-sm-8">@Instructor.LastName</dd>
+                    <dt class="col-sm-4">First Name</dt>
+                    <dd class="col-sm-8">@Instructor.FirstMidName</dd>
+                    <dt class="col-sm-4">Hiredate</dt>
+                    <dd class="col-sm-8">@Instructor.HireDate.ToString("dd MMM yyyy")</dd>
+                    <dt class="col-sm-4">Location</dt>
+                    <dd class="col-sm-8">@Instructor.Location</dd>
+                </dl>
+            </div>
+            <div class="col-sm-6">
+                <h4>Courses taught:</h4>
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Course ID</th>
+                            <th scope="col">Course Title</th>
+                            <th scope="col">Department</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var course in Instructor.Courses)
+                        {
+                            <tr>
+                                <td>@course.CourseID</td>
+                                <td>@course.CourseTitle</td>
+                                <td>@course.DepartmentName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <a href="/instructors/edit/@Instructor.Id">Edit</a> |
+            <a href="/instructors">Back to List</a>
+        </div>
+    }
+</div>

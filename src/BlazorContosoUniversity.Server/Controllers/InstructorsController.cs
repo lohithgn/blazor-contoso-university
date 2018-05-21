@@ -41,10 +41,27 @@ namespace BlazorContosoUniversity.Server.Controllers
         }
 
         // GET: api/Instructors/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetInstructor")]
+        public async Task<IActionResult> Get(int? id)
         {
-            return "value";
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var instructor = await _context.Instructors
+                                      .Include(o => o.OfficeAssignment)
+                                      .Include(c => c.CourseAssignments)
+                                        .ThenInclude(c => c.Course)
+                                            .ThenInclude(d => d.Department)
+                                      .AsNoTracking()
+                                      .SingleOrDefaultAsync(i => i.ID == id);
+            if (instructor == null)
+            {
+                return NotFound();
+            }
+            var mapped = _mapper.Map<InstructorDto>(instructor);
+            return Ok(mapped);
         }
 
         // POST: api/Instructors
