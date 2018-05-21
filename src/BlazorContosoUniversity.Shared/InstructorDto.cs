@@ -12,6 +12,6 @@ namespace BlazorContosoUniversity.Shared
         public string FirstMidName { get; set; }
         public DateTime HireDate { get; set; }
         public string Location { get; set; }
-        public List<CourseDto> Courses { get; set; }
+        public List<CourseAssignmentDto> Courses { get; set; }
     }
 }

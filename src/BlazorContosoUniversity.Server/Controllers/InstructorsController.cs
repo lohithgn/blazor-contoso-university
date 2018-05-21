@@ -29,15 +29,15 @@ namespace BlazorContosoUniversity.Server.Controllers
         [Route("")]
         public async Task<IActionResult> Get()
         {
-            var instrcutors = await _context.Instructors
+            var instructors = await _context.Instructors
                                       .Include(o => o.OfficeAssignment)
                                       .Include(c => c.CourseAssignments)
                                         .ThenInclude(c => c.Course)
                                       .OrderBy(l => l.LastName)
                                       .AsNoTracking()
-                                      .ProjectTo<List<InstructorDto>>()
                                       .ToListAsync();
-            return Ok(instrcutors);
+            var mapped = _mapper.Map<List<InstructorDto>>(instructors);
+            return Ok(mapped);
         }
 
         // GET: api/Instructors/5
