@@ -1,0 +1,28 @@
+﻿@page "/departments/details/{DeptID}"
+@inherits DetailsModel
+
+<h2>Details</h2>
+
+<div>
+    <h4>Department</h4>
+    <hr />
+    @if (IsBusy)
+    {<p>Loading...</p>}
+    else
+    {
+     <dl class="row">
+         <dt class="col-sm-2">Name</dt>
+         <dd class="col-sm-10">@Department.Name</dd>
+         <dt class="col-sm-2">Budget</dt>
+         <dd class="col-sm-10">@($"${Department.Budget}")</dd>
+         <dt class="col-sm-2">Start Date</dt>
+         <dd class="col-sm-10">@Department.StartDate.ToString("dd MMM yyyy")</dd>
+         <dt class="col-sm-2">Administrator</dt>
+         <dd class="col-sm-10">@Department.AdministratorFullName</dd>
+     </dl>
+        <div>
+            <a href="/departments/edit/@Department.DepartmentID">Edit</a> |
+            <a href="/departments">Back to List</a>
+        </div>
+    }
+</div>

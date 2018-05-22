@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BlazorContosoUniversity.Infrastructure;
+using BlazorContosoUniversity.Models;
 using BlazorContosoUniversity.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,12 +34,13 @@ namespace BlazorContosoUniversity.Server.Controllers
                                   .Include(a => a.Administrator)
                                   .AsNoTracking()
                                   .ToListAsync();
-            return Ok(_mapper.Map<List<DepartmentDto>>(departments));
+            var mapped = _mapper.Map<List<DepartmentDto>>(departments);
+            return Ok(mapped);
         }
 
         // GET: api/departments/5
-        [HttpGet, ActionName("GetDepartment")]
-        [Route("{id}")]
+        [HttpGet]
+        [Route("{id}"), ActionName("GetDepartment")]
         public async Task<IActionResult> GetById(int? id)
         {
             if (id == null)
@@ -60,22 +62,68 @@ namespace BlazorContosoUniversity.Server.Controllers
         // POST: api/departments
         [HttpPost]
         [Route("")]
-        public void Post([FromBody]string value)
+        public async Task<IActionResult> Post([FromBody]DepartmentDto newDepartment)
         {
+            if (newDepartment == null)
+            {
+                return BadRequest();
+            }
+            var departmentToCreate = new Department
+            {
+                Budget = newDepartment.Budget,
+                Name = newDepartment.Name,
+                StartDate = newDepartment.StartDate,
+                InstructorID = newDepartment.InstructorID,
+            };
+            _context.Add(departmentToCreate);
+            await _context.SaveChangesAsync();
+            return CreatedAtRoute("GetDepartment", new { id = departmentToCreate.DepartmentID });
         }
 
         // PUT: api/departments/5
         [HttpPut]
         [Route("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<IActionResult> Put(int? id, [FromBody]DepartmentDto updatedDepartment)
         {
+            if (updatedDepartment == null || updatedDepartment.DepartmentID != id)
+            {
+                return BadRequest();
+            }
+
+            var departmentToUpdate = await _context.Departments.FindAsync(id);
+            if (departmentToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            departmentToUpdate.Budget = updatedDepartment.Budget;
+            departmentToUpdate.InstructorID = updatedDepartment.InstructorID;
+            departmentToUpdate.Name = updatedDepartment.Name;
+            departmentToUpdate.StartDate = updatedDepartment.StartDate;
+
+            _context.Departments.Update(departmentToUpdate);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
 
         // DELETE: api/departments/5
         [HttpDelete]
         [Route("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            var department = await _context.Departments.FindAsync(id);
+            if (department == null)
+            {
+                return NotFound();
+            }
+
+            _context.Departments.Remove(department);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }

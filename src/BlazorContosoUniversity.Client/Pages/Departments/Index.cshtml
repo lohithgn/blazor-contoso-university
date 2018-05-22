@@ -1,0 +1,43 @@
+﻿@page "/departments"
+@inherits IndexModel
+
+<h2>Departments</h2>
+
+<p>
+    <a href="/departments/create">Create New</a>
+</p>
+
+@if (IsBusy)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Budget</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">Administrator</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var department in Departments)
+            {
+                <tr>
+                    <th scope="row">@department.Name</th>
+                    <td>@($"${department.Budget}")</td>
+                    <td>@department.StartDate.ToString("dd MMM yyyy")</td>
+                    <td>@department.AdministratorFullName</td>
+                    <td>
+                        <ActionLinkButton Action="Details" Route="/departments" RouteValue="@department.DepartmentID.ToString()"></ActionLinkButton>
+                        <ActionLinkButton Action="Edit" Route="/departments" RouteValue="@department.DepartmentID.ToString()"></ActionLinkButton>
+                        <ActionLinkButton Action="Delete" Route="/departments" RouteValue="@department.DepartmentID.ToString()"></ActionLinkButton>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

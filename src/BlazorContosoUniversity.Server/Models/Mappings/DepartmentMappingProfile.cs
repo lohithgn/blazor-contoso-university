@@ -13,6 +13,7 @@ namespace BlazorContosoUniversity.Server.Models
         public DepartmentMappingProfile()
         {
             CreateMap<Department, DepartmentDto>();
+                //.ForMember(d => d.AdministratorName, opt => opt.MapFrom(src => src.Administrator.FullName)) ;
         }
     }
 }

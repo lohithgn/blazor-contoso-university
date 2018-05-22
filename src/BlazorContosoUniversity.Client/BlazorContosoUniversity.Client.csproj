@@ -33,6 +33,8 @@
     <None Include="Pages\Courses\Details.cshtml" />
     <None Include="Pages\Courses\Edit.cshtml" />
     <None Include="Pages\Courses\Index.cshtml" />
+    <None Include="Pages\Departments\Details.cshtml" />
+    <None Include="Pages\Departments\Index.cshtml" />
     <None Include="Pages\Instructors\Delete.cshtml" />
     <None Include="Pages\Instructors\Details.cshtml" />
     <None Include="Pages\Instructors\Edit.cshtml" />
@@ -186,6 +188,22 @@
 
   <ItemGroup>
     <Content Remove="Pages\Instructors\Delete.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Departments\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Departments\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Departments\Details.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Departments\Details.cshtml" />
   </ItemGroup>
 
 </Project>
