@@ -33,7 +33,9 @@
     <None Include="Pages\Courses\Details.cshtml" />
     <None Include="Pages\Courses\Edit.cshtml" />
     <None Include="Pages\Courses\Index.cshtml" />
+    <None Include="Pages\Instructors\Delete.cshtml" />
     <None Include="Pages\Instructors\Details.cshtml" />
+    <None Include="Pages\Instructors\Edit.cshtml" />
     <None Include="Pages\Instructors\Index.cshtml" />
     <None Include="Pages\Students\Create.cshtml" />
     <None Include="Pages\Students\Delete.cshtml" />
@@ -42,6 +44,7 @@
     <None Include="Pages\Students\Index.cshtml" />
     <None Include="Pages\Students\StudentDetails.cshtml" />
     <None Include="Pages\Students\StudentEnrollments.cshtml" />
+    <None Include="Pages\Instructors\Create.cshtml" />
     <None Include="Shared\ActionLinkButton.cshtml" />
   </ItemGroup>
 
@@ -159,6 +162,30 @@
 
   <ItemGroup>
     <Content Remove="Pages\Instructors\details.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Instructors\Edit.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Instructors\Edit.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Services\Create.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Services\Create.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Instructors\Delete.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Instructors\Delete.cshtml" />
   </ItemGroup>
 
 </Project>

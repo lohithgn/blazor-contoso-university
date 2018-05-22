@@ -1,0 +1,98 @@
+﻿@page "/instructors/edit/{InstructorID}"
+@inherits EditModel
+<h2>Edit</h2>
+
+<h4>Instructor</h4>
+<hr />
+@if (IsBusy)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form novalidate="novalidate">
+                <div class="form-group">
+                    <label for="LastName" class="control-label"><b>Last Name</b></label>
+                    <input name="LastName" id="LastName" bind="@Instructor.LastName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="FirstMidName" class="control-label"><b>First Name</b></label>
+                    <input name="FirstMidName" id="FirstMidName" bind="@Instructor.FirstMidName" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="HireDate" class="control-label"><b>Enrollment Date</b></label>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <select name="HireDate" id="HireDate" class="custom-select" bind="@HireDay">
+                                <option selected="">Day</option>
+                                @for (var dayCounter = 1; dayCounter <= LastDayInMonth; dayCounter++)
+                                {
+                                    <option value="@dayCounter">@dayCounter</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <select class="custom-select" bind="@HireMonth">
+                                <option selected="">Month</option>
+                                <option value="1">Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+                                <option value="5">May</option>
+                                <option value="6">Jun</option>
+                                <option value="7">Jul</option>
+                                <option value="8">Aug</option>
+                                <option value="9">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <select class="custom-select" bind="@HireYear">
+                                <option selected="">Year</option>
+                                @for (var counter = 2018; counter >= 1900; counter--)
+                                {
+                                    <option value="@counter">@counter</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Location" class="control-label"><b>Office Locaion</b></label>
+                    <input name="Location" id="Location" bind="@Instructor.Location" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                
+            </form>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="Location" class="control-label"><b>Courses taught</b></label>
+                <ul class="list-group">
+                    @foreach (var course in AssignedCourses)
+                    {
+                        <li class="list-group-item list-group-item-primary">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" bind="@course.Assigned" name="@course.CourseID" id="@course.CourseID" />
+                                <label class="form-check-label" for="@course.CourseID">
+                                    @course.CourseID @course.Title
+                                </label>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <a class="btn btn-default" href="/instructors">Cancel</a> <input type="button" value="Save" class="btn btn-primary" onclick="@OnSaveClick" />
+        </div>
+    </div>
+}
