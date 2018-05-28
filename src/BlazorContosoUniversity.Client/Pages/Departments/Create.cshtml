@@ -1,0 +1,82 @@
+﻿@page "/departments/create"
+@inherits CreateModel
+<h2>Create</h2>
+<h4>Department</h4>
+<hr />
+@if (IsBusy)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="Name" class="control-label"><b>Name</b></label>
+                <input name="Name" id="Name" bind="@Department.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Budget" class="control-label"><b>First Name</b></label>
+                <input type="text" name="Budget" id="Budget" bind="@Department.Budget" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="StartDate" class="control-label"><b>Start Date</b></label>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <select name="StartDay" id="HireDate" class="custom-select" bind="@StartDay">
+                            <option selected="">Day</option>
+                            @for (var dayCounter = 1; dayCounter <= LastDayInMonth; dayCounter++)
+                            {
+                                <option value="@dayCounter">@dayCounter</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="custom-select" bind="@StartMonth">
+                            <option selected="">Month</option>
+                            <option value="1">Jan</option>
+                            <option value="2">Feb</option>
+                            <option value="3">Mar</option>
+                            <option value="4">Apr</option>
+                            <option value="5">May</option>
+                            <option value="6">Jun</option>
+                            <option value="7">Jul</option>
+                            <option value="8">Aug</option>
+                            <option value="9">Sep</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="custom-select" bind="@StartYear">
+                            <option selected="">Year</option>
+                            @for (var counter = 2018; counter >= 1900; counter--)
+                            {
+                                <option value="@counter">@counter</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Instructor" class="control-label"><b>Instructor</b></label>
+                <select class="custom-select" bind="@Department.InstructorID">
+                    <option selected="">-- Select Instructor --</option>
+                    @foreach (var instructor in Instructors)
+                    {
+                        <option value="@instructor.Id">@($"{instructor.FirstMidName} {instructor.LastName}")</option>
+                    }
+                </select>
+                <span class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <a class="btn btn-default" href="/departments">Cancel</a> <input type="button" value="Save" class="btn btn-primary" onclick="@OnSaveClick" />
+        </div>
+    </div>
+}
