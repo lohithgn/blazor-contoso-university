@@ -8,6 +8,7 @@ Note: WIP
 ## Main Page
 ![Main Page](https://raw.githubusercontent.com/lohithgn/blazor-contoso-university/master/assets/MainPage.PNG)
 
+## Statistics
 ![Statistics](https://raw.githubusercontent.com/lohithgn/blazor-contoso-university/master/assets/Statistics.png)
 
 
