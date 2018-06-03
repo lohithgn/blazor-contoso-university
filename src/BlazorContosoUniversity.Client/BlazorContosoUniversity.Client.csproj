@@ -19,14 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <BlazorGenerate Remove="Pages\about.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Pages\about.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Pages\About.cshtml" />
     <None Include="Pages\Courses\Create.cshtml" />
     <None Include="Pages\Courses\Delete.cshtml" />
@@ -231,6 +223,14 @@
 
   <ItemGroup>
     <Content Remove="Pages\Departments\Delete.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\About.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\About.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -22,7 +22,8 @@ namespace BlazorContosoUniversity.Client.Pages.Students
 
         protected override void OnInit()
         {
-            Student = new StudentDto() {
+            Student = new StudentDto()
+            {
                 EnrollmentDate = DateTime.Today
             };
             Day = DateTime.Today.Day;
@@ -35,10 +36,7 @@ namespace BlazorContosoUniversity.Client.Pages.Students
         {
             Student.EnrollmentDate = DateTime.Parse($"{Year}/{Month}/{Day}");
             var created = await Client.Create(Student);
-            if(created)
-            {
-                UriHelper.NavigateTo("/students");
-            }
+            UriHelper.NavigateTo("/students");
         }
     }
 }

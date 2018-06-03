@@ -16,6 +16,7 @@ namespace BlazorContosoUniversity.Client
                 services.AddSingleton<DepartmentsServiceClient>();
                 services.AddSingleton<CoursesServiceClient>();
                 services.AddSingleton<InstructorsServiceClient>();
+                services.AddSingleton<StatisticsServiceClient>();
             });
 
             new BrowserRenderer(serviceProvider).AddComponent<App>("app");

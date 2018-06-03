@@ -1,3 +1,62 @@
 ﻿@page "/about"
+@inherits AboutModel
 
-<h2>Student Body Statistics</h2>
+<h2>Statistics</h2>
+@if (IsBusy)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="row mb-3">
+        <div class="col-xl-3 col-sm-6 py-2">
+            <div class="card bg-success text-white h-100">
+                <div class="card-body bg-success">
+                    <div class="rotate">
+                        <span class="oi oi-people display-4"></span>
+                    </div>
+                    <h6 class="text-uppercase">Students</h6>
+                    <h1 class="display-4">@Stats.Students</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 py-2">
+            <div class="card text-white bg-danger h-100">
+                <div class="card-body bg-danger">
+                    <div class="rotate">
+                        <span class="oi oi-book display-4"></span>
+                    </div>
+                    <h6 class="text-uppercase">Courses</h6>
+                    <h1 class="display-4">@Stats.Courses</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 py-2">
+            <div class="card text-white bg-info h-100">
+                <div class="card-body bg-info">
+                    <div class="rotate">
+                        <span class="oi oi-person display-4"></span>
+                    </div>
+                    <h6 class="text-uppercase">Instructors</h6>
+                    <h1 class="display-4">@Stats.Instructors</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 py-2">
+            <div class="card text-white bg-warning h-100">
+                <div class="card-body">
+                    <div class="rotate">
+                        <span class="oi oi-briefcase display-4"></span>
+                    </div>
+                    <h6 class="text-uppercase">Departments</h6>
+                    <h1 class="display-4">@Stats.Departments</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <canvas id="statsChart" style="width:95%;height:250px"></canvas>
+        </div>
+    </div>
+}
