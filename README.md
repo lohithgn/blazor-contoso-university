@@ -8,6 +8,8 @@ Note: WIP
 ## Main Page
 ![Main Page](https://raw.githubusercontent.com/lohithgn/blazor-contoso-university/master/assets/MainPage.PNG)
 
+![Statistics](https://raw.githubusercontent.com/lohithgn/blazor-contoso-university/master/assets/Statistics.png)
+
 
 ## Students Listing
 ![Students Listing Page](https://raw.githubusercontent.com/lohithgn/blazor-contoso-university/master/assets/Students.PNG)
